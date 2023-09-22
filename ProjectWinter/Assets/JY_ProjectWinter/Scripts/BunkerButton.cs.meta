@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:ProjectWinter/Assets/JY_ProjectWinter/Scripts/BunkerButton.cs.meta
+guid: fdd5f9a1829c9814b923a70be0595129
+========
+guid: c367e4a22b656ef49b77e929a27633d9
+>>>>>>>> origin/CSG001:ProjectWinter/Assets/SG_ProjectWinter/Scripts/UI_Scripts/SG_ItemDragScript.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

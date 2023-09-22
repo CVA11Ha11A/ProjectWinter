@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/HW_ProjectWinter/Scene/HW_Lobby.unity
+    guid: 9dd89d5643f23624d8a2c44d78d4d864
+  - enabled: 1
+    path: Assets/HW_ProjectWinter/Scene/HW_WaitingRoom.unity
+    guid: be89eab549069204f8aaa0637b515fd1
+  - enabled: 1
+    path: Assets/HW_ProjectWinter/Scene/HW_LoadingScene.unity
+    guid: f1d3c6c19f13d294bbcef4f65a0a522a
+  - enabled: 0
+    path: Assets/JY_ProjectWinter/Scenes/MainScene.unity
+    guid: 55e0f810fcc06d441bfd56f21c26483b
+  - enabled: 1
+    path: Assets/HW_ProjectWinter/Scene/HW_PlayScene.unity
+    guid: aba4f36b00b21064eb58e9bab3e04024
+  m_configObjects: {}
