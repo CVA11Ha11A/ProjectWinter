@@ -86,7 +86,7 @@ public class SG_ItemSlot : MonoBehaviour
     }
 
     // ItemImageObj를 인스턴스후 슬롯의 자식오브젝트로 넣어주는 함수
-    private void ImageObjInstance()
+    public void ImageObjInstance()
     {
         itemImageClone = Instantiate(itemImagePrefab, this.transform.position, Quaternion.identity);
         itemImageClone.transform.SetParent(this.transform);

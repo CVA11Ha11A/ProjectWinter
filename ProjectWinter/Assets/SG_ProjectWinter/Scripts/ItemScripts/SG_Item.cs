@@ -13,6 +13,7 @@ public class SG_Item : ScriptableObject
     public Sprite itemImage; //아이템의 이미지
 
     public GameObject itemPrefab; // 아이템의 프리팹
+    public GameObject craftingPrefab;   // 제작대에서 제작시 Instance될경우 나올 아이템
 
     public string weaponType; //무기 유형
 
