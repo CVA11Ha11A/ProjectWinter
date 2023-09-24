@@ -22,14 +22,24 @@ public class SG_ItemSlot : MonoBehaviour
     // 필요한 컴포넌트     
     public TextMeshProUGUI text_Count;
     public GameObject itemCountImg;
+    public Image itemCountImage;
 
     public GameObject slotTopParentObj;
 
+    private Color weaponColorSet;   // 무기일때에 A값 투명하게 해줄 컬러 설정
+
     private void Start()
+    {
+        StartInIt();
+    }
+
+   private void StartInIt()
     {
         slotTopParentObj = this.transform.parent.gameObject;
         // slot의 최상위 오브젝트 태그로 누군지 구별하기위해 최상위 오브젝트 삽입해주는 함수
-        GetThisTopParentObj();  
+        GetThisTopParentObj();
+
+        weaponColorSet = new Color(1f, 1f, 1f, 0f);
     }
 
 
@@ -59,17 +69,31 @@ public class SG_ItemSlot : MonoBehaviour
                 ImageObjInstance();
             }
 
-            //itemCountImg.SetActive(true);
             text_Count.text = itemCount.ToString();
             itemImage.sprite = item.itemImage;
         }
         else
         {
-            text_Count.text = "0";
-            //itemCountImg.SetActive(false);
+            if (itemImage == null)
+            {
+                ImageObjInstance();
+            }
+
+            text_Count.text = itemCount.ToString();
+            itemImage.sprite = item.itemImage;
+            WeaponColorSet();
+
         }
 
         SetColor(1);
+    }
+
+    // 먹은 아이템이 무기 일때에 아이템 Text와 CountImage 색 조절
+    public void WeaponColorSet()
+    {
+        text_Count.color = weaponColorSet;
+        itemCountImage.color = weaponColorSet;
+
     }
 
     // 아이템 개수 조정
@@ -105,6 +129,7 @@ public class SG_ItemSlot : MonoBehaviour
 
         GameObject tempObj002;
         tempObj002 = tempObj.gameObject.transform.GetChild(0).gameObject;
+        itemCountImage = tempObj002.GetComponent<Image>();
         itemCountImg = tempObj002.gameObject;
 
         // 맨위에 tempObj 재활용
@@ -123,6 +148,7 @@ public class SG_ItemSlot : MonoBehaviour
 
             GameObject tempObj002;
             tempObj002 = tempObj.gameObject.transform.GetChild(0).gameObject;
+            itemCountImage = tempObj002.GetComponent<Image>();
             itemCountImg = tempObj002.gameObject;
 
             // 맨위에 tempObj 재활용
@@ -168,6 +194,7 @@ public class SG_ItemSlot : MonoBehaviour
     }
 
 
+    //최상위 부모 오브젝트 태그를 가져오기 위해 찾는 로직
     private void GetThisTopParentObj()
     {        
         //최상위 부모 오브젝트 태그를 가져오기 위해 찾는 로직

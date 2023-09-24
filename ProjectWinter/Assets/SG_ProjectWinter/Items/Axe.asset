@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f93fe405c7bd5f443b6f17d41a3d0b21, type: 3}
-  m_Name: MechanicalPart
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  itemName: MechanicalPart
-  itemImage: {fileID: 21300000, guid: 6e2fc30fad991444ba6c29d25f574a86, type: 3}
-  itemPrefab: {fileID: 1561730446266639118, guid: 33385aef2e2f3f04ebbdc8974c4e875f, type: 3}
-  weaponType: 
-  itemType: 2
+  itemName: Axe
+  itemImage: {fileID: 21300000, guid: 4325c66dc3a1d00419dbd381c79a0fa4, type: 3}
+  itemPrefab: {fileID: 1446194298358780897, guid: 557924cd200bd194eb334cfe4856a26f, type: 3}
+  weaponType: Axe
+  itemDamage: 5
+  itemHealth: 0
+  itemWarmth: 0
+  itemSatiety: 0
+  itemType: 0

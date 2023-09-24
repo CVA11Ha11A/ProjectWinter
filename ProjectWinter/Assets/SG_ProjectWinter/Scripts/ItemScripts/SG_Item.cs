@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,12 +11,20 @@ public class SG_Item : ScriptableObject
 
 
     public string itemName; //아이템의 이름
+
     public Sprite itemImage; //아이템의 이미지
 
-    public GameObject itemPrefab; // 아이템의 프리팹
-    public GameObject craftingPrefab;   // 제작대에서 제작시 Instance될경우 나올 아이템
+    public GameObject itemPrefab; // 아이템의 프리팹    
 
     public string weaponType; //무기 유형
+
+    public int itemDamage;  // 아이템의 데미지
+
+    public int itemHealth;  // 아이템의 힐량
+
+    public int itemWarmth; // 사용시 올라갈 플레이어 온도
+
+    public int itemSatiety; // 사용시 올라갈 플레이어 포만감
 
     public ItemType itemType;
 
@@ -27,5 +36,6 @@ public class SG_Item : ScriptableObject
         Ingredient,
         ETC
     }
+   
 
 }

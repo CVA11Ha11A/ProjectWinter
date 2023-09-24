@@ -9,6 +9,10 @@ public class SG_ProductionManager : MonoBehaviour
     private GameObject madeItemObj;
     private GameObject madeItemObjClone;
 
+    // 아이템 Instance 할떄에 스폰될 Position 과 Rotaition
+    Vector3 spawnPosition;
+    Quaternion spawnRotation;
+
     private bool isCanCraftItem;    // 아이템 조건이 맞지않다면 false가 되어서 함수를 나가게할 변수    
 
     private int tempItemp001Count;
@@ -25,7 +29,8 @@ public class SG_ProductionManager : MonoBehaviour
 
     private int inItCount;        // 코루틴으로 한프레임 쉬도록 만들때의 슬롯의 인덱스를저장할 변수
 
-    private Coroutine coroutine;    // 코루틴 박싱
+    private Coroutine itemSetUpdatecoroutine;    // 코루틴 박싱
+    private Coroutine weaponColorCoroutine; // 무기 컬러 조절 코루틴
 
     public void StartProduction(SG_Inventory _PlayerInven, SG_WorkStationRecipeImage _ProductionRecipe) // 제작 버튼 클릭시 들어올 함수
     {
@@ -46,7 +51,7 @@ public class SG_ProductionManager : MonoBehaviour
         InItMadeItem(_PlayerInven, _ProductionRecipe);        // 만든 아이템을 빈슬롯이 존재한다면 플레이어 슬롯에 넣어주고 없다면 플레이어 위치에 Instance해주는 함수
 
 
-        ResetVariable();    // 변수 초기화 해주는 함수
+        //ResetVariable();    // 변수 초기화 해주는 함수
 
 
     }   // StartProduction()
@@ -150,7 +155,14 @@ public class SG_ProductionManager : MonoBehaviour
                 _PlayerInven.slots[i].itemCount = _ProductionRecipe.itemRecipe.madeItemCount;   // 완성된 아이템 갯수 기입
                 inItCount = i;
                 _PlayerInven.slots[i].ImageObjInstance();   // 자식오브젝트로 Item Image Instace후 자동으로 필요한 Component 넣어주는 함수 Call                
-                coroutine = StartCoroutine(PlayerItemSetUpdate(_PlayerInven));
+                itemSetUpdatecoroutine = StartCoroutine(PlayerItemSetUpdate(_PlayerInven));
+                Debug.LogFormat("만든게 무기인가? -> {0}", _ProductionRecipe.itemRecipe.madeItem.itemType == SG_Item.ItemType.Weapon);
+                if (_ProductionRecipe.itemRecipe.madeItem.itemType == SG_Item.ItemType.Weapon)  // 만든 아이템이 무기일경우 들어갈함수
+                {
+                    //_PlayerInven.slots[i].WeaponColorSet(); // 아이템 CountText,CountImage 투명도 조절해주는 함수
+                    weaponColorCoroutine = StartCoroutine(WeaponColorUpdate(_PlayerInven));
+                }
+                else { /*PASS*/ }
                 return; // 빈슬롯에 넣어주었으면 함수 탈출
             }
             else { /*PASS*/ }
@@ -159,7 +171,12 @@ public class SG_ProductionManager : MonoBehaviour
         // 이아래로 온다면 슬롯이 빈곳이 없다는 의미
         madeItemObj = _ProductionRecipe.itemRecipe.madeItem.itemPrefab;
 
-        madeItemObjClone = Instantiate(madeItemObj, _PlayerInven.slots[0].slotTopParentObj.transform);
+        // 스폰될 위치를 인벤토리 열었던 플레이어의 위치로 잡아줌
+        spawnPosition = _PlayerInven.slots[0].slotTopParentObj.transform.position;
+        spawnRotation = _PlayerInven.slots[0].slotTopParentObj.transform.rotation;
+
+        // 만든 아리템을 플레이어의 위치로 Instance
+        madeItemObjClone = Instantiate(madeItemObj, spawnPosition, spawnRotation);
         
 
 
@@ -176,10 +193,15 @@ public class SG_ProductionManager : MonoBehaviour
         checkItemEnoughCount = true;
     }
    
-    IEnumerator PlayerItemSetUpdate(SG_Inventory _PlayerInven)
+    IEnumerator PlayerItemSetUpdate(SG_Inventory _PlayerInven)  // 플레이어 아이템표시 업데이트를 1프레임 뒤에 해줄 코루틴
     {
         yield return null;
         _PlayerInven.slots[inItCount].MoveItemSet();
+    }
+    IEnumerator WeaponColorUpdate(SG_Inventory _PlayerInven)
+    {
+        yield return null;
+        _PlayerInven.slots[inItCount].WeaponColorSet();
     }
 
 }
